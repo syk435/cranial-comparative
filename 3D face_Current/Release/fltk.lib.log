@@ -1,0 +1,18 @@
+﻿Build started 8/1/2016 4:40:10 PM.
+     1>Project "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\fltk.lib.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\fltk.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       Lib:
+         All outputs are up-to-date.
+         fltk.lib.vcxproj -> C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\Release\fltk.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\fltk.unsuccessfulbuild".
+         Touching "Release\fltk.lastbuildstate".
+     1>Done Building Project "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\fltk.lib.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.02

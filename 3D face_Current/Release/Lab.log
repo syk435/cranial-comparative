@@ -1,0 +1,28 @@
+﻿Build started 4/15/2016 5:43:17 AM.
+     1>Project "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\Lab.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\Lab.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.\ /Zi /nologo /W1 /WX- /O2 /Ob2 /Os /Oy- /D _CRT_SECURE_NO_DEPRECATE /D WIN32 /D NDEBUG /D _WINDOWS /D WIN32_LEAN_AND_MEAN /D VC_EXTRA_LEAN /D WIN32_EXTRA_LEAN /D _VC80_UPGRADE=0x0710 /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Release/" /Fd".\Release/vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Rendering\RenderingPrimitives.cpp
+         RenderingPrimitives.cpp
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Release\Lab.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:Release\ glu32.lib opengl32.lib comctl32.lib wsock32.lib fltk.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:libcd /MANIFEST /ManifestFile:"Release\Lab.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:".\Release/cube.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"Release\Lab.lib" /MACHINE:X86 .\Release/ArcBall.obj
+         .\Release/bmpfile.obj
+         .\Release/Common.obj
+         .\Release/main.obj
+         .\Release/ObjectViewer.obj
+         .\Release/OpenGLRenderer.obj
+         .\Release/RenderingPrimitives.obj
+         "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\Release\fltk.lib"
+         Lab.vcxproj -> C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\Release\Lab.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"Release\Lab.exe;#1" /manifest Release\Lab.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\Lab.unsuccessfulbuild".
+         Touching "Release\Lab.lastbuildstate".
+     1>Done Building Project "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\3D face_Current\Lab.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.94

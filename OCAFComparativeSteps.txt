@@ -1,0 +1,17 @@
+Comparative:
+*OPTIONAL*1. Make sure number of files is 2
+*OPTIONAL*2. For each, if size is greater than 2 megabytes:
+	a. QuadricEdgeDecimation and output to stage with same name
+	b. else just copy to stage with same name
+3. Run CPD preprocessing
+4. Run CPD registration, output not Update only COR to stage
+5. Run Compute Curvature, output principal curvature files 
+6. Run Change3DFile, output to stage
+7. Run ComparativePreProcessing, output combined + other files to stage
+8. Run ComparitiveAnalysis
+    a. Output file with RAFS LAFS and AS for both inputs when user hits b (?)
+    b. Output file with relative changed surface area for max,min,mean,gaussian w/ thresholds of .25,.5,.75
+    c. Keep window open so peeps can keep cycling through and screenshot
+
+Normative:
+1. Change error weight to less (/2) to allow more drastic merging effects

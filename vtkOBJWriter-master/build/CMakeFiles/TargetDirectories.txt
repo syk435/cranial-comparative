@@ -1,0 +1,5 @@
+C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/build/CMakeFiles/RUN_TESTS.dir
+C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/build/CMakeFiles/vtkOBJWriterExample.dir
+C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/build/CMakeFiles/vtkOBJWriterTest.dir
+C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/build/CMakeFiles/ZERO_CHECK.dir

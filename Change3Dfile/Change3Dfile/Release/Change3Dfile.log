@@ -1,0 +1,26 @@
+﻿Build started 4/15/2016 2:43:16 AM.
+     1>Project "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Change3Dfile\Change3Dfile.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\Change3Dfile.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt change3Dfile.cpp
+         change3Dfile.cpp
+     1>change3Dfile.cpp(69): warning C4101: 'VTindex2' : unreferenced local variable
+     1>change3Dfile.cpp(69): warning C4101: 'VTindex3' : unreferenced local variable
+     1>change3Dfile.cpp(72): warning C4101: 'c' : unreferenced local variable
+     1>change3Dfile.cpp(69): warning C4101: 'VTindex1' : unreferenced local variable
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Release\Change3Dfile.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\Change3Dfile.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Release\Change3Dfile.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Release\Change3Dfile.lib" /MACHINE:X86 Release\change3Dfile.obj
+         Generating code
+         Finished generating code
+         Change3Dfile.vcxproj -> C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Release\Change3Dfile.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Release\Change3Dfile.exe;#1" /manifest Release\Change3Dfile.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\Change3Dfile.unsuccessfulbuild".
+         Touching "Release\Change3Dfile.lastbuildstate".
+     1>Done Building Project "C:\Users\Dell\Documents\OCAF\TCH research 20160211\PlasticSurgeryJournal\OpenGL_Project\Change3Dfile\Change3Dfile\Change3Dfile.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.92
