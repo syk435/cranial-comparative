@@ -3,6 +3,9 @@ var container;
 var camera, scene, renderer;
 
 var mouseX = 0, mouseY = 0;
+var mouse;
+var raycaster;
+var mouseClick = false;
 
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
@@ -47,6 +50,11 @@ function init() {
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	window.addEventListener( "keydown", onKeyDown, true);
 	window.addEventListener( 'resize', onWindowResize, false );
+
+	raycaster = new THREE.Raycaster();
+	mouse = new THREE.Vector2();
+
+	window.addEventListener( 'mousedown', onMouseDown, false );
 
 }
 
@@ -198,7 +206,16 @@ function onDocumentMouseMove( event ) {
 
 }
 
-			//
+function onMouseDown( event ) {
+
+	// calculate mouse position in normalized device coordinates
+	// (-1 to +1) for both components
+
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	mouseClick = true;
+
+}
 
 function animate() {
 
@@ -211,8 +228,29 @@ function render() {
 
 	camera.position.x += ( mouseX - camera.position.x ) * .05;
 	camera.position.y += ( - mouseY - camera.position.y ) * .05;
-
 	camera.lookAt( scene.position );
+
+	// update the picking ray with the camera and mouse position
+	if (mouseClick == true) {
+		raycaster.setFromCamera( mouse, camera );
+		// calculate objects intersecting the picking ray
+		var intersects = raycaster.intersectObjects( scene.children );
+		for ( var i = 0; i < intersects.length; i++ ) {
+			//intersects[ i ].object.material.color.set( 0xff0000 );
+			//console.log(intersects[i]);
+			var faceIndex = intersects[0].faceIndex;
+		    var obj = intersects[0].object;
+		    var geom = obj.geometry;
+		    var faces = obj.geometry.faces;
+		    var facesIndices = ["a","b","c"];
+        	geom.faces[faceIndex].vertexColors[0] = new THREE.Color(0xff0000);
+        	geom.faces[faceIndex].vertexColors[1] = new THREE.Color(0xff0000);
+        	geom.faces[faceIndex].vertexColors[2] = new THREE.Color(0xff0000);
+			geom.colorsNeedUpdate = true;
+		}
+
+		mouseClick = false;
+	}
 
 	renderer.render( scene, camera );
 

@@ -46,6 +46,6 @@ function runCurvatureAnalysis(vertexCurvatures, faces) {
   	//geometry.computeFaceNormals();
   	var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
   	var mesh = new THREE.Mesh(geometry, material);
-  	console.log(mesh);
+  	//console.log(mesh);
   	scene.add(mesh);
 }
