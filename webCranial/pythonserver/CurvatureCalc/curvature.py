@@ -1,5 +1,6 @@
 import numpy
 import json
+import sys
 
 def normalize_v3(arr):
     ''' Normalize a numpy array of 3 component vectors shape=(n,3) '''
@@ -8,7 +9,7 @@ def normalize_v3(arr):
     i = 0
     for len in numpy.nditer(lens, op_flags=['readwrite']):
         if len == 0:
-            print "index: %d" % (i)
+            ##print "index: %d" % (i)
             len +=1;
         i +=1
     arr[:,0] /= lens
@@ -28,7 +29,7 @@ if __name__ == "__main__":
     #add empty at start to make 1-indexed, not 0-indexed
     vertices = numpy.vstack([vertices,[0,0,0]])
     
-    with open("..\\..\\nodeserver\\public\\assets\\patients\\Patient1_decimated96percent_7978v.obj", "r") as filestream:
+    with open(sys.argv[1], "r") as filestream:
         for line in filestream:
             if line.startswith("v "):
                 line = line[2:]
@@ -42,8 +43,8 @@ if __name__ == "__main__":
                 currentLine[2] = currentLine[2][:-1]
                 currentFace = numpy.array(map(int, currentLine))
                 faces = numpy.vstack([faces,currentFace])
-    print "Number of Vertices: %d" % (len(vertices))
-    print "Number of Faces: %d\n" % (len(faces))
+    ##print "Number of Vertices: %d" % (len(vertices))
+    ##print "Number of Faces: %d\n" % (len(faces))
     faces = faces.astype(int)
 
     #Create a zeroed array with the same type and shape as our vertices i.e., per vertex normal
@@ -68,7 +69,7 @@ if __name__ == "__main__":
     #print norm
     normalize_v3(norm)
     norm = numpy.insert(norm, (0), [0,0,0], axis = 0)
-    print len(norm)
+    ##print len(norm)
     
     curvaturesDict = {}
     facesDict = {}
@@ -101,7 +102,8 @@ if __name__ == "__main__":
     #print len(curvaturesDict)
     #print curvaturesDict[1]
     jsonCurvDict = {}
-    for i in xrange(1,7979):
+    ##print len(vertices)
+    for i in xrange(1,len(vertices)):
         maxp = curvaturesDict[i][0]
         minp = curvaturesDict[i][0]
         for curve in curvaturesDict[i]:
@@ -115,8 +117,11 @@ if __name__ == "__main__":
         jsonCurvDict[i].append((maxp+minp)/2)
         jsonCurvDict[i].append(vertices[i].tolist())
         #stream.write("%f,%f,%f,%f\n"%(minp,maxp,(maxp*minp),((maxp+minp)/2)))
-    with open("curvature.json", "w") as stream:
+    ##print len(jsonCurvDict)
+    
+    ##print jsonCurvDict
+    with open(sys.argv[1]+"curvature.json", "w") as stream:
         json.dump(jsonCurvDict,stream)
         
-    with open("faces.json", "w") as f:
-        json.dump(facesDict,f)
+    ##with open("faces.json", "w") as f:
+    ##    json.dump(facesDict,f)

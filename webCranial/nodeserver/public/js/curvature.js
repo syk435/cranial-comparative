@@ -1,6 +1,10 @@
-function colorMapping(n) {
-	//0 to 240, where 240 is blue
-    return 'hsl(' + n + ',100%,50%)';
+function colorMapping(value,maximum) {
+	minimum = 0.0;
+	ratio = 2.0 * (value-minimum) / (maximum - minimum)
+	b = Math.trunc(Math.max(0, 255*(1 - ratio)))
+    r = Math.trunc(Math.max(0, 255*(ratio - 1)))
+    g = 255 - b - r
+    return 'rgb(' + r + ',' + g + ','+b + ')';
 }
 
 function calcSurfaceAreaChange(geometry){
@@ -11,19 +15,48 @@ function calcSurfaceAreaChange(geometry){
 function runCurvatureAnalysis(vertexCurvatures, faces) {
 	//TEST: render model for MEAN curvature
 	//find maxCurv, use vertexCurvatures[4] array and faces to recreate patient geometry,
-	//select vertex color with Math.abs(vertexCurvatures[3])/maxMean * colorScale
+	//select vertex color with Math.abs(vertexCurvatures[3])/maxCurv * colorScale
+	//console.log(typeof(vertexCurvatures));
+	//console.log(faces);
+	//vertexCurvatures =  JSON.parse(vertexCurvatures);
+	//faces = JSON.parse(faces.trim());
+	console.log(typeof(faces));
 	var MEAN = 3;
 	var MIN = 0;
 	var MAX = 1;
 	var GAUSS = 2;
 
-	var maxMean = 0;
+	var maxCurv = 0;
+	var prevMax = 0;
+	var prevPrev = 0;
+	var prev3 = 0;
 	for (var key in vertexCurvatures) {
   		if (vertexCurvatures.hasOwnProperty(key)) {	
-    		 if (Math.abs(vertexCurvatures[key][MAX]) > maxMean) {maxMean = Math.abs(vertexCurvatures[key][MAX]);}
+    		 if (Math.abs(vertexCurvatures[key][MEAN]) > maxCurv) {prev3 = prevPrev; prevPrev = prevMax; prevMax = maxCurv;maxCurv = Math.abs(vertexCurvatures[key][MEAN]);}
   		}
 	}
-	console.log('maxMean -> ' + maxMean);
+    var IS_JSON = true;
+    try
+    {
+        var json = $.parseJSON(vertexCurvatures);
+    }
+    catch(err)
+    {
+        IS_JSON = false;
+    }
+    //console.log(vertexCurvatures);
+    console.log('IS_JSON: ' + IS_JSON);
+    console.log('maxCurv -> ' + maxCurv);
+	console.log('prevMax -> ' + prevMax);
+	console.log('prevPrev -> ' + prevPrev);
+	console.log('prev3 ->' + prev3);
+	if(maxCurv>=(3*prevMax)) {maxCurv=prevMax;}
+	if(maxCurv>=(3*prevPrev)) {maxCurv=prevPrev;}
+	console.log('maxCurv -> ' + maxCurv);
+	///****TEST*****
+	var testCIEL = .1
+	maxCurv = testCIEL;
+	//run std deviation, clip out huge outliers later ***
 
 	//Later load geometry via JSONLoader..?
 	var geometry = new THREE.Geometry();
@@ -35,9 +68,15 @@ function runCurvatureAnalysis(vertexCurvatures, faces) {
   	for (var key in faces) {
   		if (faces.hasOwnProperty(key)) {
   			var fc = new THREE.Face3(faces[key][0]-1,faces[key][1]-1,faces[key][2]-1);
-  			fc.vertexColors[0] = new THREE.Color(colorMapping((1-(Math.abs(vertexCurvatures[faces[key][0]][MAX])/maxMean))*240));
-  			fc.vertexColors[1] = new THREE.Color(colorMapping((1-(Math.abs(vertexCurvatures[faces[key][1]][MAX])/maxMean))*240));
-  			fc.vertexColors[2] = new THREE.Color(colorMapping((1-(Math.abs(vertexCurvatures[faces[key][2]][MAX])/maxMean))*240));
+  			var curv0 = Math.abs(vertexCurvatures[faces[key][0]][MEAN]);
+  			var curv1 = Math.abs(vertexCurvatures[faces[key][1]][MEAN]);
+  			var curv2 = Math.abs(vertexCurvatures[faces[key][2]][MEAN]);
+  			if(curv0>testCIEL){curv0=testCIEL;}
+  			if(curv1>testCIEL){curv1=testCIEL;}
+  			if(curv2>testCIEL){curv2=testCIEL;}
+  			fc.vertexColors[0] = new THREE.Color(colorMapping(curv0,maxCurv));
+  			fc.vertexColors[1] = new THREE.Color(colorMapping(curv1,maxCurv));
+  			fc.vertexColors[2] = new THREE.Color(colorMapping(curv2,maxCurv));
   			geometry.faces.push(fc);
   		}
   	}

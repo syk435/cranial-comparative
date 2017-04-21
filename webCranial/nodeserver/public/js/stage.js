@@ -40,7 +40,7 @@ function init() {
 	numberOfColors = 512;
 
 	//load model in uncolored mode
-	loadModel("default");
+	///loadModel("default");
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -54,11 +54,11 @@ function init() {
 	raycaster = new THREE.Raycaster();
 	mouse = new THREE.Vector2();
 
-	window.addEventListener( 'mousedown', onMouseDown, false );
+	///window.addEventListener( 'mousedown', onMouseDown, false );
 
 }
 
-function loadModel(mode) {
+function loadModel(fileName, mode) {
 				
 	var manager = new THREE.LoadingManager();
 	manager.onProgress = function ( item, loaded, total ) {
@@ -92,7 +92,7 @@ function loadModel(mode) {
 
 		// model
 		var loader = new THREE.OBJLoader( manager );
-		loader.load( 'assets/patients/Patient1_decimated96percent_7978v.obj', function ( object ) {
+		loader.load( 'uploads/'+fileName, function ( object ) {
 
 			object.traverse( function ( child ) {
 
@@ -116,8 +116,8 @@ function loadModel(mode) {
 		// calculate coloring and add to scene callback
 		var url = 'http://localhost:5000/curvature';
 		var url2 = 'http://localhost:5000/curvatureFaces';
-		$.getJSON(url, function (data, status) {
-			$.getJSON(url2, function (data1, status1) {
+		$.getJSON(url, {file: fileName}, function (data, status) {
+			$.getJSON(url2, {file: fileName}, function (data1, status1) {
 				runCurvatureAnalysis(data,data1);
 			})
 		});
@@ -182,7 +182,7 @@ function onKeyDown(e) {
 	if(e.keyCode == 67){
 		console.log("C");
 		cleanScene();
-		loadModel("curvature analysis");
+		loadModel(firstFileName,"curvature analysis");
 	}
 
 }
