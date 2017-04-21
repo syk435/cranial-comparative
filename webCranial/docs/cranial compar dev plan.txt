@@ -1,0 +1,53 @@
+cranial code:
+ - setup webserver + browserify single-page client + async [CHECK]
+
+ - node secure login quick setup [CHECK] 
+   * also you can just do app.get("/some_random_id", (req, res) => res.send(200))
+
+ - automate file upload [CHECK]
+   * put button [CHECK]
+   * user browse to file path -> load via three.js obj reader [CHECK]
+
+ - launch python script with path parameters [CHECK]
+   * async child_process call to kick off stand-alone python process that dies when done [CHECK]
+   * edit python script to use param as file name, and to write to local file when done [CHECK]
+   * callback to update mesh coloring w/ curvature [CHECK]
+   * if triggered, launch python curv. script and on success launch loadModel with coloring w/ curv and faces
+	-where to get filename from? previously from the form...maybe it's still there? [CHECK]
+
+ - github 
+   * git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch "*.sdf" HEAD
+[remote "origin"]
+        url = https://syk435@bitbucket.org/syk435/cranial-comparative.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+
+ - use browersify + watchify + beefy + uglify-js
+
+ - allow file upload and visualize 2nd mesh
+
+ - curvature color 2nd mesh
+
+ - surface area change coloration
+   * registration python
+   * calculation 
+   * coloring (only on 2nd?)
+
+ - calc asymmetry in JS client -> print out
+
+ - delete patient data on server
+
+ - viz scale (low to high curvature)
+
+ - setup on azure node
+
+email Makkai
+cranial paper reformat submit
+inf reading, hw sol
+graphic lec
+scan cog rob lec
+l3uddi logo
+l3uddi concept vid (gif, 3 secs)
+l3uddi neural net proto
