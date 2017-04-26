@@ -23,20 +23,28 @@ cranial code:
 	[branch "master"]
         remote = origin
         merge = refs/heads/master
+ 
+ - registration python [CHECK]
 
- - allow file upload and visualize 2nd mesh
-   * setup multiple scenes
-   * secondary file upload
-   * add to scene
+ - allow file upload and visualize 2nd mesh [CHECK]
+   * setup multiple scenes [CHECK]
+   * secondary file upload [CHECK]
+   * add to scene [CHECK]
 
- - curvature color 2nd mesh
+ - curvature color 2nd mesh [CHECK]
 
- - surface area change coloration
-   * registration python
-   * calculation 
-   * coloring (only on 2nd?)
+ - calc and color curv. change
+   * onto dup. of 2nd mesh
 
- - calc asymmetry in JS client -> print out
+ - surface area change calculation 
+   * print out nicely
+
+ - calc asymmetry in JS client
+   * print out nicely
+
+ - nicer multi-scene and controls [CHECK]
+
+ - scene text
 
  - delete patient data on server
 
@@ -44,9 +52,15 @@ cranial code:
 
  - viz scale (low to high curvature)
 
+ - loading indicator
+
  - setup on azure node
 
+ - try/catch python errors
+
  - use browersify + watchify + beefy + uglify-js
+
+ - allow >2 patient comparisions at a time
 
 email Makkai
 cranial paper reformat submit

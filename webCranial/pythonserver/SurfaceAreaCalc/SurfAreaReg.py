@@ -64,7 +64,7 @@ def main():
     #print "Number of Y Vertices: %d" % (len(Y))
     
     X = np.array([]).reshape(0,3)
-    with open("Base_01_decimated.obj", "r") as filestream:
+    with open(sys.argv[1], "r") as filestream:
         for line in filestream:
             if line.startswith("v "):
                 line = line[2:]
@@ -78,7 +78,7 @@ def main():
 	#print X
 
 	Y = np.array([]).reshape(0,3)
-	with open("Patient_02_decimated.obj", "r") as filestream:
+	with open(sys.argv[2], "r") as filestream:
 		for line in filestream:
 			if line.startswith("v "):
 				line = line[2:]
@@ -100,10 +100,10 @@ def main():
     reg.register(None)
     print 'Total Iterations: ',reg.iteration
     print 'End Error: ',reg.err
-    np.savetxt("X.txt", X)
-    np.savetxt("Y.txt", Y)
-    np.savetxt("T.txt", reg.Y)
-    np.savetxt("Corr.txt",cpdCorresp(reg.X, reg.Y, reg.sigma2, 0.6, reg.X.shape[0], reg.Y.shape[0], reg.X.shape[1]))
+##    np.savetxt("X.txt", X)
+##    np.savetxt("Y.txt", Y)
+    np.savetxt(sys.argv[2]+"T.txt", reg.Y)
+    np.savetxt(sys.argv[2]+"Corr.txt",cpdCorresp(reg.X, reg.Y, reg.sigma2, 0.6, reg.X.shape[0], reg.Y.shape[0], reg.X.shape[1]))
     #print reg.X
     #print reg.Y
 ##    plt.show()

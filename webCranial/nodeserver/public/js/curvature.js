@@ -11,8 +11,12 @@ function calcSurfaceAreaChange(geometry){
 	//
 }
 
+function calcAsymmetry(){
+  //
+}
+
 //c'mon bro, callbacks pls
-function runCurvatureAnalysis(vertexCurvatures, faces) {
+function runCurvatureAnalysis(vertexCurvatures, faces, sceneIndex) {
 	//TEST: render model for MEAN curvature
 	//find maxCurv, use vertexCurvatures[4] array and faces to recreate patient geometry,
 	//select vertex color with Math.abs(vertexCurvatures[3])/maxCurv * colorScale
@@ -35,18 +39,8 @@ function runCurvatureAnalysis(vertexCurvatures, faces) {
     		 if (Math.abs(vertexCurvatures[key][MEAN]) > maxCurv) {prev3 = prevPrev; prevPrev = prevMax; prevMax = maxCurv;maxCurv = Math.abs(vertexCurvatures[key][MEAN]);}
   		}
 	}
-    var IS_JSON = true;
-    try
-    {
-        var json = $.parseJSON(vertexCurvatures);
-    }
-    catch(err)
-    {
-        IS_JSON = false;
-    }
-    //console.log(vertexCurvatures);
-    console.log('IS_JSON: ' + IS_JSON);
-    console.log('maxCurv -> ' + maxCurv);
+  
+  console.log('maxCurv -> ' + maxCurv);
 	console.log('prevMax -> ' + prevMax);
 	console.log('prevPrev -> ' + prevPrev);
 	console.log('prev3 ->' + prev3);
@@ -86,5 +80,6 @@ function runCurvatureAnalysis(vertexCurvatures, faces) {
   	var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
   	var mesh = new THREE.Mesh(geometry, material);
   	//console.log(mesh);
-  	scene.add(mesh);
+  	scenes[sceneIndex].add(mesh);
+    scenes[sceneIndex].userData.camera.lookAt(mesh.position);
 }

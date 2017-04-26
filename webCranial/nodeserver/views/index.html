@@ -1,40 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - loaders - OBJ loader</title>
+		<title>Tristar Medical Technologies</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
+			* {
+				box-sizing: border-box;
+				-moz-box-sizing: border-box;
+			}
+
 			body {
-				font-family: Monospace;
-				background-color: #000;
-				color: #fff;
+				color: #000;
+				font-family:Monospace;
+				font-size:13px;
+
+				background-color: #fff;
 				margin: 0px;
-				overflow: hidden;
 			}
+
 			#info {
-				color: #fff;
 				position: absolute;
-				top: 10px;
-				width: 100%;
-				text-align: center;
-				z-index: 100;
-				display:block;
+				top: 0px; width: 100%;
+				padding: 5px;
+				text-align:center;
 			}
-			#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+
+			#content {
+				position: absolute;
+				top: 0px; width: 100%;
+				z-index: 1;
+				padding: 3em 0 0 0;
+			}
+
+			a {
+				color: #0080ff;
+			}
+
+			#c {
+				position: fixed;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+			}
+
+			.list-item {
+				display: inline-block;
+				margin: 1em;
+				padding: 1em;
+				box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.25);
+			}
+
+			.list-item .scene {
+				width: 300px;
+				height: 300px;
+			}
+
+			.list-item .description {
+				color: #888;
+				font-family: sans-serif;
+				font-size: large;
+				width: 200px;
+				margin-top: 0.5em;
+			}
 		</style>
 	</head>
 
 	<body>
-		<div id="info">
-		Cranial Visualization test <br /><br />
-		press C: visualize mean curvature 
-		</div>
-		<div id="buttons">
-			<input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+		<canvas id="c"></canvas>
+
+		<div id="content">
+			<div id="info">Plastic Surgery Outcome Analytics</div>
+			<div id="buttons">
+			<input id="upload-input" type="file" name="uploads[]"></br></br>
+			</div>
+			<div id="buttons">
+			<input id="upload-input1" type="file" name="uploads1"></br>
+			</div>
 		</div>
 		<script type='text/javascript' >
             var firstFileName = '';
+            var secondFileName = '';
 		</script>
 		<script src="js/three.js"></script>
 		<script src="js/OBJLoader.js"></script>
@@ -42,8 +88,16 @@
 		<script src="js/stage.js"></script>
 		<script src="js/curvature.js"></script>
 		<script src="js/Lut.js"></script>
+		<script src="js/OrbitControls.js"></script>
 		<script src="js/util.js"></script>
+		<script id="template" type="notjs">
+			<div class="scene"></div>
+			<div class="description">$</div>
+		</script>
 		<script>
+			var canvas;
+
+			var scenes = [];
 
 			init();
 			animate();

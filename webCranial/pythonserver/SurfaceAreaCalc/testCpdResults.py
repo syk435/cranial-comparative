@@ -9,7 +9,7 @@ arrNew = np.loadtxt("Corr.txt")
 X = np.loadtxt("X.txt")
 Y = np.loadtxt("Y.txt")
 T = np.loadtxt("T.txt")
-Y = Y+60
+Y = Y+130
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
