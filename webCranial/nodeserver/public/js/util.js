@@ -79,5 +79,5 @@ $(document).ready(function(){
 
 var socket = io();
 socket.on('reg corr data', function(data){
-    console.log(data.corrJson[0][0]);
+    runCurvatureDiff(data.curveJson1, data.curveJson2, data.faceJson, data.corrJson)
 });

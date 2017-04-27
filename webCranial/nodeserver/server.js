@@ -101,6 +101,7 @@ app.get('/curvatureFaces', function(req, res) {
 });
 
 app.get('/registerImages', function(req, res) {
+    //*TEMP DISABLE PYTHON WHILE TESTING
     var py = spawn('python', ['../pythonserver/Registration/PatientReg.py','public\\\\uploads\\\\'+req.query.file1,'public\\\\uploads\\\\'+req.query.file2]);
     py.stdout.on('data', function(data){
         //console.log('quack');
@@ -108,11 +109,29 @@ app.get('/registerImages', function(req, res) {
     py.stdout.on('end', function(){
         console.log('registration complete');
         var corrJson;
+        var faceJson;
+        var curveJson1;
+        var curveJson2;
         fs.readFile('./public/uploads/'+req.query.file2+'Corr.json', 'utf8', function (err, data) {
             if (err) throw err;
             corrJson = JSON.parse(data);
-            io.emit('reg corr data', { corrJson: corrJson });
-            //res.json(corrJson);
+
+            fs.readFile('./public/uploads/'+req.query.file2+'faces.json', 'utf8', function (err, data) {
+                if (err) throw err;
+                faceJson = JSON.parse(data);
+                
+                fs.readFile('./public/uploads/'+req.query.file1+'curvature.json', 'utf8', function (err, data) {
+                    if (err) throw err;
+                    curveJson1 = JSON.parse(data);
+                    
+                    fs.readFile('./public/uploads/'+req.query.file2+'curvature.json', 'utf8', function (err, data) {
+                        if (err) throw err;
+                        curveJson2 = JSON.parse(data);
+                        
+                        io.emit('reg corr data', { corrJson: corrJson, faceJson: faceJson, curveJson1: curveJson1, curveJson2: curveJson2 });
+                    });
+                });
+            });
         });
     });
     res.status(200).json({ok:true})

@@ -15,8 +15,46 @@ function calcAsymmetry(){
   //
 }
 
-function runCurvatureDiff(vertexCurvatures, faces, corr) {
-  //
+function runCurvatureDiff(vertexCurvatures1, vertexCurvatures2, faces, corr) {
+  var MEAN = 3;
+  var MIN = 0;
+  var MAX = 1;
+  var GAUSS = 2;
+
+  var sceneIndex = 4;
+  var testCIEL = .1
+  var Beta = 1.5
+
+  var geometry = new THREE.Geometry();
+  for (var key in vertexCurvatures2) {
+    if (vertexCurvatures2.hasOwnProperty(key)) { 
+      geometry.vertices.push(new THREE.Vector3(vertexCurvatures2[key][4][0],vertexCurvatures2[key][4][1],vertexCurvatures2[key][4][2]));
+    }
+  }
+  for (var key in faces) {
+    if (faces.hasOwnProperty(key)) {
+      var fc = new THREE.Face3(faces[key][0]-1,faces[key][1]-1,faces[key][2]-1);
+      var curv0 = Math.abs(Math.abs(vertexCurvatures2[faces[key][0]][MEAN]) - Math.abs(vertexCurvatures1[corr[faces[key][0]-1][0]][MEAN]));
+      var curv1 = Math.abs(Math.abs(vertexCurvatures2[faces[key][1]][MEAN]) - Math.abs(vertexCurvatures1[corr[faces[key][1]-1][0]][MEAN]));
+      var curv2 = Math.abs(Math.abs(vertexCurvatures2[faces[key][2]][MEAN]) - Math.abs(vertexCurvatures1[corr[faces[key][2]-1][0]][MEAN]));
+      curv0 = 1-Math.exp(-1*Beta*(curv0/(Math.abs(Math.abs(vertexCurvatures2[faces[key][0]][MEAN]) + Math.abs(vertexCurvatures1[corr[faces[key][0]-1][0]][MEAN])))));
+      curv1 = 1-Math.exp(-1*Beta*(curv1/(Math.abs(Math.abs(vertexCurvatures2[faces[key][1]][MEAN]) + Math.abs(vertexCurvatures1[corr[faces[key][1]-1][0]][MEAN])))));
+      curv2 = 1-Math.exp(-1*Beta*(curv2/(Math.abs(Math.abs(vertexCurvatures2[faces[key][2]][MEAN]) + Math.abs(vertexCurvatures1[corr[faces[key][2]-1][0]][MEAN])))));
+      /*if(curv0>testCIEL){curv0=testCIEL;}
+      if(curv1>testCIEL){curv1=testCIEL;}
+      if(curv2>testCIEL){curv2=testCIEL;}*/
+      fc.vertexColors[0] = new THREE.Color(colorMapping(curv0,1));
+      fc.vertexColors[1] = new THREE.Color(colorMapping(curv1,1));
+      fc.vertexColors[2] = new THREE.Color(colorMapping(curv2,1));
+      geometry.faces.push(fc);
+    }
+  }
+
+  geometry.computeBoundingSphere();
+  var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
+  var mesh = new THREE.Mesh(geometry, material);
+  scenes[sceneIndex].add(mesh);
+  scenes[sceneIndex].userData.camera.lookAt(mesh.position);
 }
 
 //c'mon bro, callbacks pls
@@ -24,11 +62,6 @@ function runCurvatureAnalysis(vertexCurvatures, faces, sceneIndex) {
 	//TEST: render model for MEAN curvature
 	//find maxCurv, use vertexCurvatures[4] array and faces to recreate patient geometry,
 	//select vertex color with Math.abs(vertexCurvatures[3])/maxCurv * colorScale
-	//console.log(typeof(vertexCurvatures));
-	//console.log(faces);
-	//vertexCurvatures =  JSON.parse(vertexCurvatures);
-	//faces = JSON.parse(faces.trim());
-	console.log(typeof(faces));
 	var MEAN = 3;
 	var MIN = 0;
 	var MAX = 1;

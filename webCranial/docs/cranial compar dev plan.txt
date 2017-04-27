@@ -44,11 +44,13 @@ cranial code:
  - calc asymmetry in JS client
    * print out nicely
 
+ - only do SA calc for cranial
+
  - nicer multi-scene and controls [CHECK]
 
  - scene text
 
- - dummy page
+ - demo page
 
  - delete patient data on server
 
@@ -67,6 +69,9 @@ cranial code:
  - allow >2 patient comparisions at a time
 
  - refactor code
+   * cleanup comments
+   * make functions + modules separate + callbacks properly
+   * socket instead of get for python
  
  - unit tests
 
