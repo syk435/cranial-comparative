@@ -13,6 +13,20 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+var server = app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+});
+
+var io = require('socket.io')(server);
+
+io.on('connection', function(client) {
+    console.log('Client connected');
+
+    client.on('disconnect', function(data) {
+        console.log('Client disconnected');
+    });
+});
+
 app.get('/596', function(req, res){
     res.sendfile(path.join(__dirname, 'views/index.html'));
 });
@@ -86,10 +100,20 @@ app.get('/curvatureFaces', function(req, res) {
     });
 });
 
-app.get('/patient/:id', function(req, res) {
-    res.send({id:req.params.id, name: "The Name", description: "description"});
-});
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.get('/registerImages', function(req, res) {
+    var py = spawn('python', ['../pythonserver/Registration/PatientReg.py','public\\\\uploads\\\\'+req.query.file1,'public\\\\uploads\\\\'+req.query.file2]);
+    py.stdout.on('data', function(data){
+        //console.log('quack');
+    });
+    py.stdout.on('end', function(){
+        console.log('registration complete');
+        var corrJson;
+        fs.readFile('./public/uploads/'+req.query.file2+'Corr.json', 'utf8', function (err, data) {
+            if (err) throw err;
+            corrJson = JSON.parse(data);
+            io.emit('reg corr data', { corrJson: corrJson });
+            //res.json(corrJson);
+        });
+    });
+    res.status(200).json({ok:true})
 });

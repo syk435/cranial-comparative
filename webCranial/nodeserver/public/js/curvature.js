@@ -15,6 +15,10 @@ function calcAsymmetry(){
   //
 }
 
+function runCurvatureDiff(vertexCurvatures, faces, corr) {
+  //
+}
+
 //c'mon bro, callbacks pls
 function runCurvatureAnalysis(vertexCurvatures, faces, sceneIndex) {
 	//TEST: render model for MEAN curvature

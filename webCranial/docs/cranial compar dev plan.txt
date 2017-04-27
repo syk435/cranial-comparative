@@ -34,6 +34,8 @@ cranial code:
  - curvature color 2nd mesh [CHECK]
 
  - calc and color curv. change
+   * run Reg from node [CHECK]
+   * read from Corr file from uploads
    * onto dup. of 2nd mesh
 
  - surface area change calculation 
@@ -45,6 +47,8 @@ cranial code:
  - nicer multi-scene and controls [CHECK]
 
  - scene text
+
+ - dummy page
 
  - delete patient data on server
 
@@ -61,6 +65,10 @@ cranial code:
  - use browersify + watchify + beefy + uglify-js
 
  - allow >2 patient comparisions at a time
+
+ - refactor code
+ 
+ - unit tests
 
 email Makkai
 cranial paper reformat submit

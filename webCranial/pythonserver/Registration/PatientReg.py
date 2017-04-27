@@ -6,6 +6,8 @@ from pycpd import rigid_registration
 import numpy as np
 import time
 import math
+import json
+import sys
 
 def visualize(iteration, error, X, Y, ax):
     plt.cla()
@@ -103,7 +105,10 @@ def main():
 ##    np.savetxt("X.txt", X)
 ##    np.savetxt("Y.txt", Y)
     np.savetxt(sys.argv[2]+"T.txt", reg.Y)
-    np.savetxt(sys.argv[2]+"Corr.txt",cpdCorresp(reg.X, reg.Y, reg.sigma2, 0.6, reg.X.shape[0], reg.Y.shape[0], reg.X.shape[1]))
+    corrArray = cpdCorresp(reg.X, reg.Y, reg.sigma2, 0.6, reg.X.shape[0], reg.Y.shape[0], reg.X.shape[1])
+    np.savetxt(sys.argv[2]+"Corr.txt",corrArray)
+    with open(sys.argv[2]+"Corr.json", "w") as stream:
+        json.dump(corrArray.tolist(),stream)
     #print reg.X
     #print reg.Y
 ##    plt.show()
@@ -112,5 +117,6 @@ if __name__ == '__main__':
     main()
 ##	arr = np.loadtxt("02_to_01.txt")
 ##	arrNew = np.loadtxt("Corr.txt")
+##	print json.dumps(arrNew.tolist())
 ##	for num in range(0,len(arr)):
 ##		print abs(arrNew[num]-arr[num])

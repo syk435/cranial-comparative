@@ -17,7 +17,7 @@ function init() {
 	var template = document.getElementById( "template" ).text;
 	var content = document.getElementById( "content" );
 
-	for ( var i =  0; i < 4; i ++ ) {
+	for ( var i =  0; i < 5; i ++ ) {
 		// scene
 		var scene = new THREE.Scene();
 		
