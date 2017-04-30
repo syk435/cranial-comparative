@@ -44,8 +44,6 @@ cranial code:
  - calc asymmetry in JS client
    * print out nicely
 
- - only do SA calc for cranial
-
  - nicer multi-scene and controls [CHECK]
 
  - scene text
@@ -64,6 +62,8 @@ cranial code:
 
  - try/catch python errors
 
+ - only do SA calc for cranial
+
  - use browersify + watchify + beefy + uglify-js
 
  - allow >2 patient comparisions at a time
@@ -75,7 +75,8 @@ cranial code:
  
  - unit tests
 
-email Makkai
+ - email/notification in tab when job completes
+
 cranial paper reformat submit
 inf reading, hw sol
 graphic lec

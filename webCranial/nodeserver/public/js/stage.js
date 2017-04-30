@@ -30,7 +30,12 @@ function init() {
 		// make a list item
 		var element = document.createElement( "div" );
 		element.className = "list-item";
-		element.innerHTML = template.replace( '$', 'Image 1' );
+		if (i==0){element.innerHTML = template.replace( '$', 'Image 1' );}
+		if (i==1){element.innerHTML = template.replace( '$', 'Curvature Image 1' );}
+		if (i==2){element.innerHTML = template.replace( '$', 'Image 2' );}
+		if (i==3){element.innerHTML = template.replace( '$', 'Curvature Image 2' );}
+		if (i==4){element.innerHTML = template.replace( '$', 'Curvature Difference' );}
+		
 
 		// Look up the element that represents the area
 		// we want to render the scene
@@ -78,8 +83,13 @@ function init() {
 	renderer.setClearColor( 0xffffff, 1 );
 	renderer.setPixelRatio( window.devicePixelRatio );
 
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	window.addEventListener( "keydown", onKeyDown, true);
+	var element = document.createElement( "div" );
+	element.className = "list-item1";
+	element.innerHTML = template.replace( '$', "<pre>" + "<b><u>" + 'Metrics:' + '</b></u>' + '\nRelative Changed Surface Area: 0.75\n\nSymmetry Analysis:\nImage 1:\nLAFS: 29.4809\nRAFS: 28.7762\nAFS: 0.0120967\nImage 2:\nLAFS: 12.7382\nRAFS: 18.5569\nAFS: -0.18593' + "</pre>");
+	content.appendChild( element );
+
+	//document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	//window.addEventListener( "keydown", onKeyDown, true);
 	//window.addEventListener( 'resize', onWindowResize, false );
 
 	raycaster = new THREE.Raycaster();
