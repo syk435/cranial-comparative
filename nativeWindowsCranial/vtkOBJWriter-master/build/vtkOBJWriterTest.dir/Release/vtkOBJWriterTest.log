@@ -1,6 +1,0 @@
-﻿  Building Custom Rule C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/CMakeLists.txt
-  CMake does not need to re-run because C:\Users\Dell\Documents\TestGround\vtkOBJWriter-master\build\CMakeFiles\generate.stamp is up-to-date.
-  vtkOBJWriterTest.cxx
-  vtkOBJWriter.cxx
-  Generating Code...
-  vtkOBJWriterTest.vcxproj -> C:\Users\Dell\Documents\TestGround\vtkOBJWriter-master\build\Release\vtkOBJWriterTest.exe

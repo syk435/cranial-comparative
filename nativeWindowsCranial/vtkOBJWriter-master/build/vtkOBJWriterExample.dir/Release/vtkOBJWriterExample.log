@@ -1,8 +1,0 @@
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (vtkOBJWriterExample.dir\Release\) contains files shared from another project (vtkOBJWriterExample.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  0 File(s) copied
-  Building Custom Rule C:/Users/Dell/Documents/TestGround/vtkOBJWriter-master/CMakeLists.txt
-  CMake does not need to re-run because C:\Users\Dell\Documents\TestGround\vtkOBJWriter-master\build\CMakeFiles\generate.stamp is up-to-date.
-  QuadricEdgeDecimation.cxx
-  vtkOBJWriter.cxx
-  Generating Code...
-  vtkOBJWriterExample.vcxproj -> C:\Users\Dell\Documents\TestGround\vtkOBJWriter-master\build\Release\QuadricEdgeDecimation.exe
