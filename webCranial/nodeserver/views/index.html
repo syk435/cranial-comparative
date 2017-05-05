@@ -108,9 +108,19 @@
 		<script src="js/OrbitControls.js"></script>
 		<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 		<script src="js/util.js"></script>
+		<script src='js/jquery-input-file-text.js'></script>
 		<script id="template" type="notjs">
 			<div class="scene"></div>
 			<div class="description">$</div>
+		</script>
+		<script type="text/javascript">
+			$('#upload-input').inputFileText({
+    			text: 'Choose First File'
+			});
+
+			$('#upload-input1').inputFileText({
+    			text: 'Choose Second File'
+			});
 		</script>
 		<script>
 			var canvas;

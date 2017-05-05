@@ -46,9 +46,9 @@ cranial code:
 
  - nicer multi-scene and controls [CHECK]
 
- - scene text
+ - scene text [CHECK]
 
- - demo page
+ - demo page [CHECK]
 
  - delete patient data on server
 
@@ -75,10 +75,13 @@ cranial code:
  
  - unit tests
 
+ - normative generation?
+
  - email/notification in tab when job completes
 
-cranial paper reformat submit
+code
 inf reading, hw sol
+prov patent
 graphic lec
 scan cog rob lec
 l3uddi logo

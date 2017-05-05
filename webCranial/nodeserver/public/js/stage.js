@@ -152,8 +152,8 @@ function loadModel(fileName, mode, num) {
 			scenes[sceneIndex].add( object );
 			scenes[sceneIndex].userData.camera.lookAt(object.position);
 			// calculate coloring and add to scene callback
-			var url = 'http://localhost:5000/curvature';
-			var url2 = 'http://localhost:5000/curvatureFaces';
+			var url = '/curvature';
+			var url2 = '/curvatureFaces';
 			$.getJSON(url, {file: fileName}, function (data, status) {
 				$.getJSON(url2, {file: fileName}, function (data1, status1) {
 					runCurvatureAnalysis(data,data1,sceneIndex+1);

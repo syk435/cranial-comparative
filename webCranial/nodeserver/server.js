@@ -6,6 +6,8 @@ var spawn = require('child_process').spawn;
 
 var meshCalc = require('./meshcalculations.js');
 
+users = ['salem','user'];
+passwords = ['1234','password'];
 
 var app = express();
 
@@ -27,8 +29,24 @@ io.on('connection', function(client) {
     });
 });
 
-app.get('/596', function(req, res){
-    res.sendfile(path.join(__dirname, 'views/index.html'));
+app.get('/', function(req, res){
+
+  var auth = req.get("authorization");
+  if (!auth) {
+    res.set("WWW-Authenticate", "Basic realm=\"Authorization Required\"");
+    return res.status(401).send("Authorization Required");
+  } else {
+    var credentials = new Buffer(auth.split(" ").pop(), "base64").toString("ascii").split(":");
+    if (users.indexOf(credentials[0]) > -1 && credentials[1] === passwords[users.indexOf(credentials[0])]) {
+      // The username and password are correct, so the user is authorized.
+      console.log(credentials[0] + " logged in");
+      res.sendFile(path.join(__dirname, 'views/index.html'));
+    } else {
+      // The user typed in the username or password wrong.
+      return res.status(403).send("Access Denied (incorrect credentials)");
+    }
+  }
+
 });
 
 app.post('/upload', function(req, res){

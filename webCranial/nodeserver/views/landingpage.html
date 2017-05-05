@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Tristar Medical Technologies</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+		</style>
+	</head>
+	<body>
+
+		<input id="user" type="text" value="user"/></br></br>
+		<!--input id="lastName" type="text" value="password"/-->
+		<input id="tokenField" type="hidden" />
+		<input id="submitButton" type="button" value="login" />
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script type='text/javascript' >
+	$('#submitButton').on('click',function(){
+	    $.ajax({
+	          url: "/59",
+	          type: 'GET',
+	          contentType: 'application/json',
+	          headers: {
+	                    "Authorization": $('#user').val()
+	                 },
+	          async: false
+	           });
+	});
+	</script>
+
+	</body>
+</html>
