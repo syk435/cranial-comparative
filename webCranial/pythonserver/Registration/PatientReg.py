@@ -1,20 +1,21 @@
 from functools import partial
 from scipy.io import loadmat
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+#import matplotlib.pyplot as plt
+#from mpl_toolkits.mplot3d import Axes3D
 from pycpd import rigid_registration
 import numpy as np
 import time
 import math
 import json
 import sys
+from os.path import join
 
 def visualize(iteration, error, X, Y, ax):
     plt.cla()
     ax.scatter(X[:,0],  X[:,1], X[:,2], color='red')
     ax.scatter(Y[:,0],  Y[:,1], Y[:,2], color='blue')
     plt.draw()
-    print "iteration %d, error %.5f" % (iteration, error)
+    #print "iteration %d, error %.5f" % (iteration, error)
     plt.pause(0.001)
 
 def cpdCorresp(X, T, sigma2, outlier, N, M, D):
@@ -66,7 +67,7 @@ def main():
     #print "Number of Y Vertices: %d" % (len(Y))
     
     X = np.array([]).reshape(0,3)
-    with open(sys.argv[1], "r") as filestream:
+    with open(join('public','uploads',sys.argv[1]), "r") as filestream:
         for line in filestream:
             if line.startswith("v "):
                 line = line[2:]
@@ -75,21 +76,21 @@ def main():
                 currentVertex = np.array(map(float, currentLine))
                 X = np.vstack([X,currentVertex])
 
-	print "Number of Vertices: %d" % (len(X))
+	#print "Number of Vertices: %d" % (len(X))
 	#print 'Type of X data struct: ',type(X)
 	#print X
 
-	Y = np.array([]).reshape(0,3)
-	with open(sys.argv[2], "r") as filestream:
-		for line in filestream:
-			if line.startswith("v "):
-				line = line[2:]
-				currentLine = line.split(" ")
-				currentLine[2] = currentLine[2][:-1]
-				currentVertex = np.array(map(float, currentLine))
-				Y = np.vstack([Y,currentVertex])
+        Y = np.array([]).reshape(0,3)
+        with open(join('public','uploads',sys.argv[2]), "r") as filestream:
+            for line in filestream:
+                if line.startswith("v "):
+                    line = line[2:]
+                    currentLine = line.split(" ")
+                    currentLine[2] = currentLine[2][:-1]
+                    currentVertex = np.array(map(float, currentLine))
+                    Y = np.vstack([Y,currentVertex])
 
-    print "Number of Vertices: %d" % (len(Y))
+    #print "Number of Vertices: %d" % (len(Y))
     #print Y
 
 ##    fig = plt.figure()
@@ -100,14 +101,14 @@ def main():
     reg.maxIterations=150
 ##    reg.register(callback)
     reg.register(None)
-    print 'Total Iterations: ',reg.iteration
-    print 'End Error: ',reg.err
+    #print 'Total Iterations: ',reg.iteration
+    #print 'End Error: ',reg.err
 ##    np.savetxt("X.txt", X)
 ##    np.savetxt("Y.txt", Y)
-    np.savetxt(sys.argv[2]+"T.txt", reg.Y)
+    np.savetxt(join('public','uploads',sys.argv[2]+"T.txt"), reg.Y)
     corrArray = cpdCorresp(reg.X, reg.Y, reg.sigma2, 0.6, reg.X.shape[0], reg.Y.shape[0], reg.X.shape[1])
-    np.savetxt(sys.argv[2]+"Corr.txt",corrArray)
-    with open(sys.argv[2]+"Corr.json", "w") as stream:
+    np.savetxt(join('public','uploads',sys.argv[2]+"Corr.txt"),corrArray)
+    with open(join('public','uploads',sys.argv[2]+"Corr.json"), "w") as stream:
         json.dump(corrArray.tolist(),stream)
     #print reg.X
     #print reg.Y

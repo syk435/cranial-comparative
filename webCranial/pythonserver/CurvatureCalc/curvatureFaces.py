@@ -1,6 +1,7 @@
 import numpy
 import json
 import sys
+from os.path import join
 
 def normalize_v3(arr):
     ''' Normalize a numpy array of 3 component vectors shape=(n,3) '''
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     #add empty at start to make 1-indexed, not 0-indexed
     vertices = numpy.vstack([vertices,[0,0,0]])
     
-    with open(sys.argv[1], "r") as filestream:
+    with open(join('public','uploads',sys.argv[1]), "r") as filestream:
         for line in filestream:
             if line.startswith("v "):
                 line = line[2:]
@@ -78,5 +79,5 @@ if __name__ == "__main__":
         facesDict[i] = face.tolist()
         i+=1
     ##print facesDict
-    with open(sys.argv[1]+"faces.json", "w") as f:
+    with open(join('public','uploads',sys.argv[1]+"faces.json"), "w") as f:
         json.dump(facesDict,f)

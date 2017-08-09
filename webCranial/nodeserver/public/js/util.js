@@ -70,7 +70,7 @@ $('#upload-input1').on('change', function(){
 
 $(document).ready(function(){
   $("#btnSubmit").click(function(){
-    var url = 'http://localhost:5000/registerImages';
+    var url = '/registerImages';
     $.getJSON(url, {file1: firstFileName, file2: secondFileName}, function (data, status) {
         console.log('registration started');
     })

@@ -11,7 +11,7 @@ passwords = ['1234','password'];
 
 var app = express();
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8010));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -84,7 +84,7 @@ app.post('/upload', function(req, res){
 //app.get('/curvature', meshCalc.sendCurvature);
 //need to move all this into callback for upload so it's not server-wide
 app.get('/curvature', function(req, res) {
-	var py = spawn('python', ['../pythonserver/CurvatureCalc/curvature.py','public\\\\uploads\\\\'+req.query.file]);
+	var py = spawn('python', ['../pythonserver/CurvatureCalc/curvature.py',req.query.file]);
     py.stdout.on('data', function(data){
         //console.log('quack');
     });
@@ -100,7 +100,7 @@ app.get('/curvature', function(req, res) {
 });
 
 app.get('/curvatureFaces', function(req, res) {
-	var py = spawn('python', ['../pythonserver/CurvatureCalc/curvatureFaces.py','public\\\\uploads\\\\'+req.query.file]);
+	var py = spawn('python', ['../pythonserver/CurvatureCalc/curvatureFaces.py',req.query.file]);
     py.stdout.on('data', function(data){
        /// if(tempi<1){
        ///faceJson += data.toString();}
@@ -119,7 +119,7 @@ app.get('/curvatureFaces', function(req, res) {
 });
 
 app.get('/registerImages', function(req, res) {
-    var py = spawn('python', ['../pythonserver/Registration/PatientReg.py','public\\\\uploads\\\\'+req.query.file1,'public\\\\uploads\\\\'+req.query.file2]);
+    var py = spawn('python2', ['../pythonserver/Registration/PatientReg.py',req.query.file1,req.query.file2]);
     py.stdout.on('data', function(data){
     });
     py.stdout.on('end', function(){
