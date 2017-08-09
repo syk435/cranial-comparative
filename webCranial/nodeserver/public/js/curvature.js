@@ -1,10 +1,26 @@
-function colorMapping(value,maximum) {
+function colorMapping1(value,maximum) {
 	minimum = 0.0;
-	ratio = 2.0 * (value-minimum) / (maximum - minimum)
-	b = Math.trunc(Math.max(0, 255*(1 - ratio)))
-    r = Math.trunc(Math.max(0, 255*(ratio - 1)))
-    g = 255 - b - r
-    return 'rgb(' + r + ',' + g + ','+b + ')';
+	ratio = 2.0 * (value-minimum) / (maximum - minimum);
+	b = Math.trunc(Math.max(0, 255*(1 - ratio)));
+  r = Math.trunc(Math.max(0, 255*(ratio - 1)));
+  g = 255 - b - r;
+  return 'rgb(' + r + ',' + g + ','+b + ')';
+}
+
+function colorMapping2(c) {
+  r = 0;
+  b = 0;
+  g = 0;
+  if (c<0.5) {
+    r = 0;
+    b = Math.trunc(Math.max(0, 255*(1-2*c)));
+    g = Math.trunc(Math.max(0, 255*(2*c)));
+  } else{
+    r = Math.trunc(Math.max(0, 255*(2*c-1)));
+    b = 0;
+    g = Math.trunc(Math.max(0, 255*(2-2*c)));
+  }
+  return 'rgb(' + r + ',' + g + ','+b + ')';
 }
 
 function calcSurfaceAreaChange(geometry){
@@ -23,7 +39,7 @@ function runCurvatureDiff(vertexCurvatures1, vertexCurvatures2, faces, corr) {
 
   var sceneIndex = 4;
   var testCIEL = .1
-  var Beta = 1.5
+  var Beta = .5
 
   var geometry = new THREE.Geometry();
   for (var key in vertexCurvatures2) {
@@ -43,15 +59,17 @@ function runCurvatureDiff(vertexCurvatures1, vertexCurvatures2, faces, corr) {
       /*if(curv0>testCIEL){curv0=testCIEL;}
       if(curv1>testCIEL){curv1=testCIEL;}
       if(curv2>testCIEL){curv2=testCIEL;}*/
-      fc.vertexColors[0] = new THREE.Color(colorMapping(curv0,1));
-      fc.vertexColors[1] = new THREE.Color(colorMapping(curv1,1));
-      fc.vertexColors[2] = new THREE.Color(colorMapping(curv2,1));
+      fc.vertexColors[0] = new THREE.Color(colorMapping2(curv0));
+      fc.vertexColors[1] = new THREE.Color(colorMapping2(curv1));
+      fc.vertexColors[2] = new THREE.Color(colorMapping2(curv2));
       geometry.faces.push(fc);
     }
   }
 
   geometry.computeBoundingSphere();
-  var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
+  var material = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors });
+  geometry.computeVertexNormals();
+  material.shading = THREE.SmoothShading;
   var mesh = new THREE.Mesh(geometry, material);
   scenes[sceneIndex].add(mesh);
   scenes[sceneIndex].userData.camera.lookAt(mesh.position);
@@ -77,10 +95,10 @@ function runCurvatureAnalysis(vertexCurvatures, faces, sceneIndex) {
   		}
 	}
   
-  console.log('maxCurv -> ' + maxCurv);
+  /*console.log('maxCurv -> ' + maxCurv);
 	console.log('prevMax -> ' + prevMax);
 	console.log('prevPrev -> ' + prevPrev);
-	console.log('prev3 ->' + prev3);
+	console.log('prev3 ->' + prev3);*/
 	if(maxCurv>=(3*prevMax)) {maxCurv=prevMax;}
 	if(maxCurv>=(3*prevPrev)) {maxCurv=prevPrev;}
 	console.log('maxCurv -> ' + maxCurv);
@@ -105,16 +123,16 @@ function runCurvatureAnalysis(vertexCurvatures, faces, sceneIndex) {
   			if(curv0>testCIEL){curv0=testCIEL;}
   			if(curv1>testCIEL){curv1=testCIEL;}
   			if(curv2>testCIEL){curv2=testCIEL;}
-  			fc.vertexColors[0] = new THREE.Color(colorMapping(curv0,maxCurv));
-  			fc.vertexColors[1] = new THREE.Color(colorMapping(curv1,maxCurv));
-  			fc.vertexColors[2] = new THREE.Color(colorMapping(curv2,maxCurv));
+  			fc.vertexColors[0] = new THREE.Color(colorMapping1(curv0,maxCurv));
+  			fc.vertexColors[1] = new THREE.Color(colorMapping1(curv1,maxCurv));
+  			fc.vertexColors[2] = new THREE.Color(colorMapping1(curv2,maxCurv));
   			geometry.faces.push(fc);
   		}
   	}
   	geometry.computeBoundingSphere();
-  	//geometry.computeVertexNormals();
-  	//geometry.computeFaceNormals();
-  	var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
+  	var material = new THREE.MeshLambertMaterial({ vertexColors: THREE.VertexColors });
+    geometry.computeVertexNormals();
+    material.shading = THREE.SmoothShading;
   	var mesh = new THREE.Mesh(geometry, material);
   	//console.log(mesh);
   	scenes[sceneIndex].add(mesh);

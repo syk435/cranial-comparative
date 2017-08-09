@@ -62,6 +62,10 @@ function init() {
 		directionalLight.position.set( 0, 0, 1 );
 		directionalLight.name = "directionalLight";
 		scene.add( directionalLight );
+		var directionalLight2 = new THREE.DirectionalLight( 0xffeedd );
+		directionalLight2.position.set( 0, 1, -1 );
+		directionalLight2.name = "directionalLight2";
+		scene.add( directionalLight2 );
 
 		//legend settings
 		//colorMap = 'rainbow';
@@ -85,7 +89,7 @@ function init() {
 
 	var element = document.createElement( "div" );
 	element.className = "list-item1";
-	element.innerHTML = template.replace( '$', "<pre>" + "<b><u>" + 'Metrics:' + '</b></u>' + '\nRelative Changed Surface Area: 0.75\n\nSymmetry Analysis:\nImage 1:\nLAFS: 29.4809\nRAFS: 28.7762\nAFS: 0.0120967\nImage 2:\nLAFS: 12.7382\nRAFS: 18.5569\nAFS: -0.18593' + "</pre>");
+	element.innerHTML = template.replace( '$', "<pre>" + "<b><u>" + 'Metrics:' + '</b></u>' + '\nRelative Changed Surface Area: 0.42\n\nAsymmetry Analysis:\nImage 1:\nLAFS: 20.51\nRAFS: 20.10\nAFS: 0.41\n\nImage 2:\nLAFS: 22.42\nRAFS: 21.11\nAFS: 1.31' + "</pre>");
 	content.appendChild( element );
 
 	//document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -142,7 +146,7 @@ function loadModel(fileName, mode, num) {
 
 					//child.material.map = texture;
 					child.material.color.setHex(0xFFFFFF);
-					console.log(child);
+					//console.log(child);
 
 				}
 

@@ -33,10 +33,10 @@ cranial code:
 
  - curvature color 2nd mesh [CHECK]
 
- - calc and color curv. change
+ - calc and color curv. change [CHECK]
    * run Reg from node [CHECK]
-   * read from Corr file from uploads
-   * onto dup. of 2nd mesh
+   * read from Corr file from uploads [CHECK]
+   * onto dup. of 2nd mesh [CHECK]
 
  - surface area change calculation 
    * print out nicely
@@ -79,12 +79,30 @@ cranial code:
 
  - email/notification in tab when job completes
 
-code
-inf reading, hw sol
-prov patent
-graphic lec
-scan cog rob lec
-l3uddi logo
-l3uddi concept vid (gif, 3 secs)
+ - do curv calc + reg at very low decim, then render with post-subdiv for speedup
+
+bioinformatics app
+kinect motion + viz line flash 2 people
+OCAF code
+ -Asymmetry code:
+  1. Get all unit vertex normal vectors n(xn, yn, zn) 
+  2. Compute azimuth angle theta for each
+  3. Compute elevation angle phi for each
+  4. angle bins and mult. by norm mean curv
+  5. compute LAFS, RAFS, AS from adding and selecting from bins
+ -SA Change code:
+  1. Compute DS using formulas ez
+ -run on 5 cases, send
+ -run on 10 more cases, send
 l3uddi neural net proto
+prov patent
+inf reading
+inf prog
 ekg paper
+graphic lec
+dashboard, landing page
+ppt DE cranial
+scan cog rob lec
+l3uddi concept vid (gif, 3 secs)
+trials + sell discounted + testimonials from Colorado + Toronto
+think of an overarching label for my work, website revamp

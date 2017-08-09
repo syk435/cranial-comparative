@@ -119,10 +119,8 @@ app.get('/curvatureFaces', function(req, res) {
 });
 
 app.get('/registerImages', function(req, res) {
-    //*TEMP DISABLE PYTHON WHILE TESTING
     var py = spawn('python', ['../pythonserver/Registration/PatientReg.py','public\\\\uploads\\\\'+req.query.file1,'public\\\\uploads\\\\'+req.query.file2]);
     py.stdout.on('data', function(data){
-        //console.log('quack');
     });
     py.stdout.on('end', function(){
         console.log('registration complete');
